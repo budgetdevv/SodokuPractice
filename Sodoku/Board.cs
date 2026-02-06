@@ -122,5 +122,26 @@ namespace Sodoku
 
             return false;
         }
+
+        public override string ToString()
+        {
+            var lines = new List<string>();
+
+            for (var row = 0; row < Constants.ROW_OR_COLUMN_SIZE; row++)
+            {
+                var lineCells = new List<string>();
+
+                for (var col = 0; col < Constants.ROW_OR_COLUMN_SIZE; col++)
+                {
+                    var cell = Cells[Helpers.ComputeCellIndex(row, col)];
+
+                    lineCells.Add(cell.ToString());
+                }
+
+                lines.Add(string.Join(" ", lineCells));
+            }
+
+            return string.Join(Environment.NewLine, lines);
+        }
     }
 }

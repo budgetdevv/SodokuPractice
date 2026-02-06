@@ -47,5 +47,10 @@ namespace Sodoku
         {
             Value = null;
         }
+
+        public override string ToString()
+        {
+            return Value?.ToString() ?? ".";
+        }
     }
 }
