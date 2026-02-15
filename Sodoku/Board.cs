@@ -6,7 +6,7 @@ namespace Sodoku
     {
         private readonly Cell[] Cells;
 
-        private readonly Cell[] EmptyCells;
+        private Cell[] EmptyCells;
 
         public Board(int?[,] cellValues)
         {
@@ -121,6 +121,17 @@ namespace Sodoku
             nextEmptyCell = null;
 
             return false;
+        }
+
+        public delegate void MarkNewEmptyCellsDelegate(HashSet<Cell> currentEmptyCells);
+
+        public void MarkNewEmptyCells(MarkNewEmptyCellsDelegate act)
+        {
+            var updatedEmptyCells = EmptyCells.ToHashSet();
+
+            act(updatedEmptyCells);
+
+            EmptyCells = updatedEmptyCells.ToArray();
         }
 
         public override string ToString()
